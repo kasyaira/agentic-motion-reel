@@ -1,0 +1,45 @@
+{
+  "name": "agentic-motion-reel",
+  "version": "1.0.0",
+  "description": "A 3:15 cinematic motion-design showreel rendered 100% from code with Remotion — kinetic type, particles, 3D, GLSL shaders, synthesized soundtrack.",
+  "scripts": {
+    "studio": "remotion studio",
+    "render": "remotion render Showreel out/showreel.mp4 --codec=h264 --crf=20",
+    "render:source": "remotion render InkfieldSource public/footage/source.mp4",
+    "audio": "node scripts/gen-audio.mjs",
+    "fonts": "node scripts/fetch-fonts.mjs && node -e \"const fs=require('fs');const files=['SpaceGrotesk-400','SpaceGrotesk-500','SpaceGrotesk-700','Inter-400','Inter-600','Inter-800','JetBrainsMono-400','JetBrainsMono-700'];let out='// AUTO-GENERATED\\n';const e=files.map(f=>{const b=fs.readFileSync('public/fonts/'+f+'.woff2').toString('base64');return '  '+f.replace('-','_')+': \"data:font/woff2;base64,'+b+'\"'});out+='export const FONT_DATA: Record<string, string> = {\\n'+e.join(',\\n')+',\\n};\\n';fs.writeFileSync('src/font-data.ts',out)\"",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "type": "commonjs",
+  "dependencies": {
+    "@react-three/fiber": "^8.17.10",
+    "@remotion/captions": "^4.0.529",
+    "@remotion/cli": "^4.0.529",
+    "@remotion/lottie": "^4.0.529",
+    "@remotion/mac-cursors": "^4.0.529",
+    "@remotion/media-utils": "^4.0.529",
+    "@remotion/motion-blur": "^4.0.529",
+    "@remotion/noise": "^4.0.529",
+    "@remotion/paths": "^4.0.529",
+    "@remotion/rough-notation": "^4.0.529",
+    "@remotion/shapes": "^4.0.529",
+    "@remotion/three": "^4.0.529",
+    "@remotion/transitions": "^4.0.529",
+    "lottie-web": "^5.13.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "remotion": "^4.0.529",
+    "rough-notation": "^0.5.1",
+    "three": "^0.169.0"
+  },
+  "allowScripts": {
+    "esbuild@0.28.1": true
+  },
+  "devDependencies": {
+    "@types/three": "^0.186.0",
+    "typescript": "5.6"
+  }
+}

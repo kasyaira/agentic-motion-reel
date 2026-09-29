@@ -1,2 +1,8 @@
-skills/
+out/qc/
+out/render.log
 node_modules/
+skills/
+.env
+db/
+upload/
+public/audio/music.wav
