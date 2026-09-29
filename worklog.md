@@ -134,8 +134,39 @@ all 21 implemented scenes pass (see SHOWCASE_MAP.md for per-scene status).
 - `InkfieldSource` → `public/footage/source.mp4` (240 frames, H.264)
 - `Showreel` → `out/showreel.mp4` (5,850 frames, H.264, CRF 20, yuv420p)
 
+Two production incidents, both caught by QC and fixed:
+
+1. **Render crash at Scene 14** — `@remotion/lottie` rejects negative
+   `playbackRate` (TypeError). Scene 14 was the only section never still-checked
+   before the full run. Fix: final ramp window changed to 1.25× and the
+   limitation documented in CAPABILITIES.md. Re-render from scratch (~2.2 h on
+   2 cores with software WebGL — measured ≈ 40 frames/min, dipping to ≈ 18
+   frames/min inside the 3D scene).
+2. **Silent soundtrack in the muxed MP4** — the music bed was analyzed by
+   Scene 9 (`useAudioData`) but never *played*; no `<Audio>` element for
+   `music.mp3` existed at the composition root, so the mix contained only the
+   Scene 10 SFX and Scene 16 voice. Fix (two parts):
+   - source corrected: `<Audio src={staticFile('audio/music.mp3')} />` added at
+     the Showreel root (`src/Root.tsx`);
+   - deliverable repaired without re-render: music bed muxed under the existing
+     track with `amix(normalize=0)` + `alimiter`, video stream bit-copied.
+     Verified: groove section −4.7 dB mean, intro −16.9 dB, SFX/voice intact.
+
 ## Phase 8 — Deliverables & Publication
 
-- Poster/thumbnail stills + hero frame extracted from the final timeline.
-- Repository initialized and pushed to GitHub with full documentation
-  (this file, README.md, CAPABILITIES.md, SHOWCASE_MAP.md).
+- `out/showreel.mp4` — 1920×1080 · 30 fps · 3:15 · H.264 CRF 20 · AAC 192k · 44.7 MB
+- `out/showreel-vertical.mp4` — 1080×1920 · 40 s teaser **re-composed** for 9:16
+  (five signature moments rebuilt for vertical, not cropped)
+- Stills extracted from the final timeline: `poster-hero.png`,
+  `thumbnail-opening.png`, `still-particles.png`, `still-3d.png`,
+  `poster-vertical.png`
+- Repository pushed to GitHub: **kasyaira/agentic-motion-reel** (public) —
+  source, scripts, synthesized audio, hand-authored Lottie, docs, renders.
+
+## Final verification checklist
+
+- [x] `tsc --noEmit` clean
+- [x] 20+ QC stills inspected across all 21 scenes
+- [x] Final MP4 spot-checked at 6 timecodes + both audio layers measured
+- [x] Vertical teaser QC'd (FFT ring + hero, audio −4.5 dB mean)
+- [x] Repo pushed: code + docs + audio + footage + video + stills

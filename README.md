@@ -15,7 +15,9 @@ A 3 min 15 s cinematic motion-design showreel rendered 100 % from code with
 
 | File | Spec |
 |---|---|
-| `out/showreel.mp4` | 1920×1080 · 30 fps · 5,850 frames · H.264 CRF 20 · 3:15 · stereo audio |
+| `download/showreel.mp4` | 1920×1080 · 30 fps · 5,850 frames · H.264 CRF 20 · 3:15 · stereo audio (music + SFX + voice) |
+| `download/showreel-vertical.mp4` | 1080×1920 · 40 s teaser — five signature moments **re-composed** for 9:16 (not a crop) |
+| `download/poster-hero.png` · `thumbnail-opening.png` · `still-particles.png` · `still-3d.png` · `poster-vertical.png` | stills pulled from the final timeline |
 | `public/footage/source.mp4` | "Inkfield" — 8 s self-rendered source clip used by Scene 18 |
 
 ## Watch order / what each scene proves
@@ -28,7 +30,7 @@ technology → scene file, plus the full capability matrix.
 ```bash
 npm install
 npx remotion studio            # open the editor at :3000
-npx remotion render Showreel out/showreel.mp4   # full render
+npx remotion render Showreel out/showreel.mp4   # full render (then mux music, see worklog Phase 7)
 node scripts/gen-audio.mjs     # regenerate soundtrack + SFX (deterministic)
 ```
 
@@ -40,8 +42,9 @@ node scripts/gen-audio.mjs     # regenerate soundtrack + SFX (deterministic)
 
 ```
 src/
-  Root.tsx            composition root — <Showreel> + <InkfieldSource>
+  Root.tsx            composition root — <Showreel> + <InkfieldSource> + <VerticalTeaser>
   sections.ts         the timeline: 21 sections, durations, HUD labels
+  VerticalTeaser.tsx  9:16 teaser — re-composed moments, not a crop
   tokens.ts           design system (palette / fonts / easing / springs)
   font-data.ts        inlined base64 woff2 — deterministic font loading
   components/         grain, vignette, per-scene HUD

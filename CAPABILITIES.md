@@ -32,7 +32,7 @@ but not shown · `[skipped]` deliberate, reason documented.
 | 11 | 3D | @remotion/three + R3F: chrome torus knot, glass transmission sphere, instanced pillars, shadows, fog, frame-driven dolly | [rendered successfully] |
 | 12 | Post processing | 6 isolated passes — bloom stack, per-frame-seed grain, RGB channel split, scanlines, slice glitch, vignette — then combined | [rendered successfully] |
 | 13 | GLSL shader | raw WebGL fragment shaders: domain-warped FBM flow + polar tunnel, `u_time = frame/fps` | [rendered successfully] |
-| 14 | Lottie import | hand-authored JSON, `@remotion/lottie` with 1.5× → 1× → 0.4× → −1.2× speed ramp | [rendered successfully] |
+| 14 | Lottie import | hand-authored JSON, `@remotion/lottie` with 1.5× → 1× → 0.4× → 1.25× speed ramp (negative rates rejected by the component — documented) | [rendered successfully] |
 | 15 | Rough / hand-drawn | rough-notation: highlight, underline, box, circle, bracket — progress-driven, seeded | [rendered successfully] |
 | 16 | Captions | synthesized voice (TTS) + word-level spring-highlight captions | [rendered successfully] |
 | 17 | Maps | — | [skipped] — tile servers break offline/deterministic renders; no map asset could be bundled locally |

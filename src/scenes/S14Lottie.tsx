@@ -7,14 +7,15 @@ import { COLORS, FONTS } from '../tokens';
 /**
  * 14 — LOTTIE IMPORT
  * A Lottie JSON authored by hand (no external asset), driven through
- * @remotion/lottie with real speed control: 1.5x -> 1x -> 0.4x -> reverse.
+ * @remotion/lottie with real speed control: 1.5x -> 1x -> 0.4x -> 1.25x.
+ * (Negative rates are rejected by the component — documented limitation.)
  * The JSON source itself is displayed as proof of provenance.
  */
 const RATE_WINDOWS: { from: number; rate: number }[] = [
   { from: 0, rate: 1.5 },
   { from: 70, rate: 1 },
   { from: 130, rate: 0.4 },
-  { from: 190, rate: -1.2 },
+  { from: 190, rate: 1.25 },
 ];
 
 export const S14Lottie: React.FC = () => {

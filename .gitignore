@@ -1,5 +1,4 @@
-out/qc/
-out/render.log
+out/
 node_modules/
 skills/
 .env

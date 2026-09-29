@@ -1,5 +1,5 @@
 import React from 'react';
-import { AbsoluteFill, Composition, Sequence } from 'remotion';
+import { AbsoluteFill, Audio, Composition, Sequence, staticFile } from 'remotion';
 import { SECTIONS, TOTAL_FRAMES } from './sections';
 import { SceneHud } from './components/SceneHud';
 import { GlobalStyles, Grain, Vignette } from './components/Atmosphere';
@@ -18,6 +18,8 @@ const Showreel: React.FC = () => {
   return (
     <AbsoluteFill style={{ backgroundColor: COLORS.bg }}>
       <GlobalStyles />
+      {/* the synthesized music bed — starts at frame 0, runs the full film */}
+      <Audio src={staticFile('audio/music.mp3')} />
       {cuts.map(({ s, from }) => (
         <Sequence key={s.id} from={from} durationInFrames={s.dur}>
           <s.C absStart={from} />
